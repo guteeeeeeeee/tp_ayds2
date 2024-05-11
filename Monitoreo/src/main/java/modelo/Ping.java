@@ -1,5 +1,7 @@
 package modelo;
 
+import java.io.IOException;
+import java.net.UnknownHostException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -10,7 +12,7 @@ import java.util.concurrent.TimeoutException;
 public class Ping{
 	
 	public static void main(String[] args) {
-        // Crear un ExecutorService con un solo hilo
+		
         ExecutorService executor = Executors.newSingleThreadExecutor();
 
         // Crear una instancia de la tarea
@@ -26,12 +28,17 @@ public class Ping{
         } catch (TimeoutException e) {
             // La tarea excedio el tiempo limite
             System.err.println("La tarea excedió el tiempo límite.");
+            task.instanciar_nuevo_servidor();
+            System.err.println("Se instancio una nuevo servidor.");
         } catch (InterruptedException | ExecutionException e) {
-            System.err.println("Error al ejecutar la tarea: " + e.getMessage());
+        	//System.err.println("Error al ejecutar la tarea: " + e.getMessage());
+            System.out.println("error al ejecutar la tarea");
+            task.instanciar_nuevo_servidor();
+            System.err.println("Se instancio una nuevo servidor.");
         }
 
         // Apagar el ExecutorService
         executor.shutdown();
     }
-	
+	//cambiar el puerto
 }
